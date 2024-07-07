@@ -18,20 +18,6 @@ using namespace std;
 #define exp 1e9
 #define sz(x) (int((x).size()))
 
-void solve(int &a,int &b,int &c){
-    if(a+c > b+c){
-        cout<<"First"<<endl;
-        
-        return;
-    }else if(a+c < b+c){
-        cout<<"Second"<<endl;
-        return;
-        
-    }else{
-        if(c%2 == 0)cout<<"Second"<<endl;
-        else cout<<"First"<<endl;
-    }
-}
 
 int32_t main()
 {
@@ -39,9 +25,26 @@ int32_t main()
     cin.tie(NULL);
     int ttt; cin >> ttt;
     while(ttt--) {
-        int a,b,c;
-        cin>>a>>b>>c;
-        solve(a,b,c);
+        int n;
+        cin>>n;
+        vi v(n);
+        for(int i=0;i<n;i++) cin>>v[i];
+        
+        int min = INT_MAX;
+        bool isSort = true;
+        for(int i = 0;i<n-1;i++){
+            if(v[i+1] - v[i] <= min){
+                min = v[i+1] - v[i];
+            }
+            if(v[i+1] < v[i]){
+                isSort = false;
+                break;
+            }
+        }
+        if(!isSort) cout<<0<<endl;
+        else if(min == 0 ) cout<<1<<endl;
+        else cout<<min/2+1<<endl;
+
     }
     return 0;
 }
